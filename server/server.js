@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const authMiddleware = require('./authMiddleware');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 
 const server = jsonServer.create();
 
