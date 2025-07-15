@@ -53,6 +53,12 @@
       "username": "Terminator",
       "password": "000",
       "role": "ADMIN"
+    },
+    {
+      "id": 10,
+      "username": "Karina12",
+      "password": "666",
+      "role": "USER"
     }
   ]
 }
