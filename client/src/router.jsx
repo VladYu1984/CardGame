@@ -5,7 +5,7 @@ import Login from './pages/Login'
 
 const routes = [
     {
-        path: '/home',
+        path: '/',
         element: <Home/>
     },
     {
