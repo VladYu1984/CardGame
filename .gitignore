@@ -18,6 +18,7 @@
 /client/yarn-debug.log*
 /client/yarn-error.log*
 
+/server/.DS_Store
 /server/node_modules
 
 .envnode_modules/
