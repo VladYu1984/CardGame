@@ -1,3 +1,5 @@
+// BrowserRouter - оборачивает компонент в main.jsx (в этом компоненте он не нужен)
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import routes from './router';
 import Navbar from './Navbar';
