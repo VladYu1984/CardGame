@@ -59,6 +59,18 @@
       "username": "Karina12",
       "password": "666",
       "role": "USER"
+    },
+    {
+      "id": 11,
+      "username": "Vlad15",
+      "password": "000",
+      "role": "USER"
+    },
+    {
+      "id": 12,
+      "username": "Vlad16",
+      "password": "111",
+      "role": "USER"
     }
   ]
 }
