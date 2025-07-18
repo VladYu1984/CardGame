@@ -1,14 +1,22 @@
 import { useState } from 'react'
 import '../styles/registration.css'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 function Registration(){
+    const navigate = useNavigate()
+
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [load, setLoad] = useState(false)
+    const [error, setError] = useState('')
+    const [user, setUser] = useState(null)
+    const [success, setSuccess] = useState(false)
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
 
-   const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
 
     switch (true) {
@@ -34,6 +42,8 @@ function Registration(){
 
       default:
         alert('Успешная регистрация!');
+        setSuccess(true)
+        setLoad(true)
         users.push({ email, password })
         localStorage.setItem('users', JSON.stringify(users))
         setEmail('')
@@ -41,7 +51,28 @@ function Registration(){
         console.log(users)
         break;
     }
-  };
+
+      try{
+      const res = await register({email, password})
+      const {token, user} = res.data
+      localStorage.setItem('token', token)
+      localStorage.setItem('role', user.role)
+      setSuccess(true)
+      navigate('/main')
+    }catch(err){
+      console.error(err)
+      setError(err.responce?.data?.mesagge || 'Registration error')
+    }finally {
+    setLoad(false);
+    setEmail('');
+    setPassword('');
+  }
+
+};
+
+  
+  
+
 
 
     return(
@@ -65,7 +96,7 @@ function Registration(){
                   style={{cursor: (email.length === 0 || password.length === 0) 
                     ? 'not-allowed' 
                     : 'pointer'}} 
-                  disabled={email.length === 0 || password.length === 0}
+                  disabled={email.length === 0 || password.length === 0 || load === true}
                   /> 
             </form>
         </div>
