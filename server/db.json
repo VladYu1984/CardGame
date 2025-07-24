@@ -59,6 +59,34 @@
       "username": "Karina12",
       "password": "666",
       "role": "USER"
+    },
+    {
+      "id": 11,
+      "username": "Vlad15",
+      "password": "000",
+      "role": "USER"
+    },
+    {
+      "id": 12,
+      "username": "Vlad16",
+      "password": "111",
+      "role": "USER"
+    },
+    {
+      "id": 13,
+      "username": "Terminator4000",
+      "password": "000",
+      "role": "USER",
+      "age": 22,
+      "email": "test@mail.ru"
+    },
+    {
+      "id": 14,
+      "username": "hello",
+      "password": "123456",
+      "role": "USER",
+      "age": "55",
+      "email": "hello222@mail.ru"
     }
   ]
 }
