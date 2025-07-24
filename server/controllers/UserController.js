@@ -32,14 +32,18 @@ function getMe(req, res) {
 // POST /registration
 function register(req, res) {
   try {
-    const { username, password, role = 'USER' } = req.body;
+    const { username, password, role = 'USER', age, email } = req.body;
     if (!username || !password) {
       return res.status(400).json({ message: 'Username and password are required' });
     }
 
+    if (!age || !email) {
+      return res.status(400).json({ message: 'Age and email are required'})
+    }
+
     const db = readDb();
     const users = db.users || [];
-    if (users.some(u => u.username === username)) {
+    if (users.some(u => u.email === email)) {
       return res.status(409).json({ message: 'User already exists' });
     }
 
@@ -47,13 +51,15 @@ function register(req, res) {
       id: users.length ? Math.max(...users.map(u => u.id)) + 1 : 1,
       username,
       password,
-      role
+      role,
+      age,
+      email
     };
     users.push(newUser);
     writeDb({ ...db, users });
 
     const token = jwt.sign(
-      { id: newUser.id, username: newUser.username, role: newUser.role },
+      { id: newUser.id, username: newUser.username, role: newUser.role, age: newUser.age, email: newUser.email },
       JWT_SECRET,
       { expiresIn: '1h' }
     );
@@ -82,7 +88,7 @@ function login(req, res) {
       { expiresIn: '24h' }
     );
 
-    res.json({ user, token });
+    res.status(201).json({ user, token });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: err.message });
